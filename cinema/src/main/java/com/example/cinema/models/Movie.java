@@ -21,6 +21,12 @@ public class Movie {
 
     public Movie(){}
 
+    public Movie(String title, String rating, int duration){
+        this.title = title;
+        this.rating = rating;
+        this.duration = duration;
+    }
+
     public long getId() {
         return this.id;
     }
