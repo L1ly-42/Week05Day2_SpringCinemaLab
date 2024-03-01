@@ -18,10 +18,18 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
+    //Handles the following:
+    // GET /movies
+    // GET /movies?maxDuration=120
+
     @GetMapping
-    public List<Movie> getAllMovies(){
-    List<Movie> movies = movieService.getAllMovies();
-    return movies;
+    public ResponseEntity<List<Movie>> getAllMovies(
+            @RequestParam(required = false, name = "maxDuration") Integer maxDuration){
+        // GET /movies?maxDuration=140
+        if(maxDuration!=null){
+            return new ResponseEntity<>(movieService.getMoviesOfMaxDuration(maxDuration),HttpStatus.OK);}
+    // GET /movies
+    return new ResponseEntity<>(movieService.getAllMovies(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
